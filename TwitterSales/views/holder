@@ -1,0 +1,28 @@
+console.log(data.statuses[0].text);
+// find all names
+var i = 0;
+
+// find all the names
+
+for (i=0;i<data.statuses.length;i++){
+console.log("added name");
+names.push(data.statuses[i].user.name);
+
+}
+
+// find all texts
+for (i=0;i<data.statuses.length;i++){
+console.log("added text");
+texts.push(data.statuses[i].text);
+
+}
+if (loops === 0 || data.statuses.length != 100 ){
+ res.render('index', {name: names, message: texts, tests: Test()});
+}
+else {
+    console.log("the current loop is:" + loops);
+      console.log(data.statuses.length);
+ loops --;
+ var tweets = "none"
+ tweets = GetTweets(TweetName, render, data.statuses[data.statuses.length - 1].id);
+}
