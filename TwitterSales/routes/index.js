@@ -83,6 +83,7 @@ StartWaterfall();
 //});
         // this checks how similar strings are
         Similarity();
+        SimlarityWithSelf(data);
         res.render('index',{tags:TweetHashtag, texts:TweetText});
         }
       }
@@ -117,7 +118,7 @@ access_token_secret: '0ibm4ZEGkAl1MGEsylP4WoKgDQFwTklOCYArurGQLF2R4'
 });
 
 // check if there is a tweetid
-    var params = {q:hashtag, count: 1, lang: 'en'};
+    var params = {q:hashtag, count: 100, lang: 'en'};
 
   client.get('search/tweets', params, function(error, tweets, response) {
     if (!error) {
@@ -171,6 +172,24 @@ if (TweetText[o] !== TweetText[u]){
 
 
                                   }
+}
+
+function SimlarityWithSelf(data){
+  var count = 0;
+  var total = 0;
+  var k = 0;
+  for (k = 1; k < data.statuses.length; k ++){
+  var similarRatio = natural.JaroWinklerDistance(data.statuses[0].text,data.statuses[k].text);
+    total =total + similarRatio;
+
+if (k === data.statuses.length - 1){
+  total = similarRatio / total;
+  console.log("the ratio from the last " + data.statuses.length + "tweets is : " + total);
+}
+  }
+
+
+
 }
 
 
